@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra Papel Tesoura</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pedra, Papel, Tesoura</h1>
+    <p>Selecione entre pedra, papel, ou tesoura e veja se irá vencer o computador!</p>
+    <p><strong>Lembre-se:</strong>"Pedra quebra tesoura, tesoura corta papel, papel enrola pedra</p>
+    <div class='score'>
+    </div>
+    <div class='message'>
+    </div>
+    <button type='button'>Pedra</button>
+    <button type='button'>Papel</button>
+    <button type='button'>Tesoura</button>
+<script>
+    const message = document.querySelector('.message');
+    const score = document.querySelector('.score');
+    const buttons = document.querySelectorAll('button');
+    const winnerScores = [0,0];
+
+    for (let i = 0; i<buttons.length; i++) {
+        buttons[i].addEventListener('click', playGame);
+        }
+
+    function playGame(e){
+            let playerSelection = e.target.innerText;
+            let computerSelection = Math.random();
+
+            if (computerSelection < .34) {
+            computerselection = 'Pedra'
+            
+            } else if (computerselection <= .67){
+                computerselection='Papel';
+            } else {
+                computerselection = 'Tesoura';
+                
+                }
+                let result = checkWinner(playerSelection, computerselection);
+                
+                if (result==='Player'){
+                    result+= 'wins!';
+                    winnerScores[0]++;
+                }
+                if (result==='Computer'){
+                    result+='wins!';
+                    winnerScores[1]++
+                }
+                
+                if (result === 'Draw'){
+                result += '. It\'s a tie!'
+                }
+
+                score.innerHtml = 'Player: [' + winnerScores[0]+'] Computer:[' + winnerScores[1] +']';
+                
+                messenger('player: <strong>' + playerSelection + '</strong> Computer: <strong>' + computerselection + '<strong><br>' + result);
+                }
+            
+            function messenger(selectionMessage) {
+                message.innerHTML = selectionMessage;
+            }
+            
+            function checkWinner(player, computer) {
+                if (player === computer){
+                    return 'Draw';
+                }
+                
+                if (player === 'Pedra'){
+                    if (computer === 'Papel'){
+                     return 'Computer';
+                    } else {
+                        return 'Player';
+                    }
+                }
+                
+                if (player === 'Papel'){
+                if (computer === 'Tesoura'){
+                    return 'Computer';
+                } else {
+                    return 'Player';
+                }
+            }
+                     
+                if (player === 'Tesoura'){
+                    if (computer === 'Pedra'){
+                        return 'Computer';
+                     } else { 
+                         return 'Player';
+                     }
+                }
+            }
+            
+</script>
+</body>
+</html>
